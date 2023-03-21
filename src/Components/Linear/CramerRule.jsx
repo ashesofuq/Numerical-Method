@@ -107,6 +107,7 @@ const CramerRule =()=>{
                 return row;
             }
         });
+        console.log(newMatrix);
         const newA = newMatrix.map(row => row.slice(0, -1));
         const newB = newMatrix.map(row => row[newMatrix.length]);
         console.log(newA);
@@ -121,9 +122,12 @@ const CramerRule =()=>{
         setHtml(print());
         
     }
+    const exampleInput = () => {
 
-    const headerMatrix = Array.from({ length: size }, (_, i) => `x${i+1}`);
-    headerMatrix.push("B");    
+    }
+
+    // const headerMatrix = Array.from({ length: size }, (_, i) => `x${i+1}`);
+    // headerMatrix.push("B");    
     
     return (
             <Container fluid="md">
@@ -131,8 +135,8 @@ const CramerRule =()=>{
                 <br />
                 <h2>CramerRule Method</h2>
                 <br />
-                <Row>                    
-                    <Col>                    
+                <Row>
+                    <Col>
                     <Form>
                         <Form.Group className="mb-3">
                             <Form.Label column sm={2}>Input Matrix Size</Form.Label>
@@ -171,6 +175,7 @@ const CramerRule =()=>{
                             </div>
                         ))}      
                         <br />
+                        <Button variant="dart" onClick={exampleInput}>Click!!</Button>
                         <Button variant="dark" onClick={calculateMatrix}>Calculate</Button>
                         <br />                        
                     </Form>

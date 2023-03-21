@@ -1,0 +1,42 @@
+{
+    "numer":{
+        "Root_of_equation": [
+            {
+                "title" : "Bisection",
+                "equation" : "x^2 - 3",
+                "xl" : 1,
+                "xr" : 2
+            },
+            {
+                "title" : "FalsePostion",
+                "equation" : "x^2 + 5x - 9",
+                "xl" : -10,
+                "xr" : 0
+            },
+            {
+                "title" : "OnePoint",
+                "equation" : "((2x+5)/2)^(1/3)",
+                "x0" : 0
+            },
+            {
+                "title" : "Taylor",
+                "equation" : "3x^2 + 5x + 2",
+                "x0" : 0,
+                "x" : 3,
+                "n" : 3
+            },
+            {
+                "title" : "Newton",
+                "equation" : "x^3 - x - 1",
+                "x0" : 2
+            },
+            {
+                "title" : "Secant",
+                "equation" : "x^3 + 2x^2 + x - 1",
+                "x0" : 0,
+                "x1" : 1
+            }
+        ]
+    }
+}
+

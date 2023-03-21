@@ -74,6 +74,7 @@ const GaussElimination =()=>{
                 return row;
             }
         });
+        console.log(newMatrix);
         const newA = newMatrix.map(row => row.slice(0, -1));
         const newB = newMatrix.map(row => row[newMatrix.length]);
         console.log(newA);

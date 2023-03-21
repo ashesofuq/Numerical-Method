@@ -1,10 +1,13 @@
 import React from "react";
+import { useState, useEffect } from "react"
+import axios from 'axios'
 // import './App.css';
 
 import Header from './Components/Home';
 import Bisection from './Components/Bisection';
 import FalsePosition from './Components/FalsePosition';
 import Onepoint from "./Components/Onepoint";
+import Taylor from "./Components/Taylor";
 import Newton from "./Components/Newton";
 import Secant from "./Components/Secant";
 import CramerRule from "./Components/Linear/CramerRule";
@@ -17,6 +20,12 @@ import { BrowserRouter, NavLink, Routes, Route } from 'react-router-dom'
 
 
 function App() {    
+    const [Res, setRes] = useState("")
+    useEffect(() => {
+        axios.get('http://localhost:3000/numer')
+            .then((Res) => setRes(Res.data))
+        console.log(Res);
+    }, [])
     return (
         <BrowserRouter>          
           <Navbar collapseOnSelect expand="lg" variant="dark" bg="dark">
@@ -29,6 +38,7 @@ function App() {
                   <NavDropdown.Item as={NavLink} to="/Bisection">Bisection</NavDropdown.Item>
                   <NavDropdown.Item as={NavLink} to="/FalsePosition">False Position</NavDropdown.Item>
                   <NavDropdown.Item as={NavLink} to="/OnePoint">OnePoint iteration</NavDropdown.Item>
+                  <NavDropdown.Item as={NavLink} to="/Taylor">Taylor Series</NavDropdown.Item>
                   <NavDropdown.Item as={NavLink} to="/Newton">Newton Raphson</NavDropdown.Item>
                   <NavDropdown.Item as={NavLink} to="/Secant">Secant</NavDropdown.Item>
                 </NavDropdown>
@@ -51,11 +61,12 @@ function App() {
 
           <Routes>
             <Route path="/" element={<Header />} />
-            <Route path="/Bisection" element={<Bisection />} />
-            <Route path="/FalsePosition" element={<FalsePosition />} />
-            <Route path="/OnePoint" element={<Onepoint />} />
-            <Route path="/Newton" element={<Newton />} />
-            <Route path="/Secant" element={<Secant />} />
+            <Route path="/Bisection" element={<Bisection posts={Res} />} />
+            <Route path="/FalsePosition" element={<FalsePosition posts={Res} />} />
+            <Route path="/OnePoint" element={<Onepoint posts={Res} />} />
+            <Route path="/Taylor" element={<Taylor posts={Res} />} />
+            <Route path="/Newton" element={<Newton posts={Res} />} />
+            <Route path="/Secant" element={<Secant posts={Res} />} />
             <Route path="/CramerRule" element={<CramerRule />} />
             <Route path="/MatrixInversion" element={<MatrixInversion />} />
             <Route path="/test" element={<Test />} />

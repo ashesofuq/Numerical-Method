@@ -4,7 +4,14 @@ import { evaluate } from 'mathjs'
 import Plot from 'react-plotly.js';
 import 'bootstrap/dist/css/bootstrap.css';
 
-const Onepoint =()=>{
+const Onepoint =(posts)=>{
+
+    const InputChange = () => {
+        console.log(posts.posts.Root_of_equation[2]);
+        setEquation(posts.posts.Root_of_equation[2].equation);
+        setX0(posts.posts.Root_of_equation[2].x0);
+    }
+
     const print = () =>{
         console.log(data)
         setValueIter(data.map((x)=>x.iteration));
@@ -137,12 +144,13 @@ const Onepoint =()=>{
 
                         <Form.Group as={Row} className="mb-3">
                             <Form.Label column sm={3} className="">Input X0</Form.Label>
-                            <Col sm={8}><input type="number" id="X0" onChange={inputX0} style={{width:"100%"}} className="form-control"></input></Col>
-                        </Form.Group>                    
-
-                        <center><Button variant="dark" onClick={calculateRoot}>Calculate</Button></center>
+                            <Col sm={8}><input type="number" id="X0" value={X0} onChange={inputX0} style={{width:"100%"}} className="form-control"></input></Col>
+                        </Form.Group>   
                     </Form>
-                
+                    <center>
+                        <Button variant="dark" onClick={InputChange} style={{margin:"50px"}}>Example Problem</Button>
+                        <Button variant="dark" onClick={calculateRoot}>Calculate</Button>
+                    </center>
                     <br></br>
                     <h5>Answer = {X.toPrecision(7)}</h5><br />
                     {html}

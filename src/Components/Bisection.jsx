@@ -1,11 +1,19 @@
-import { useState } from "react"
-import { Button, Container, Form, Table, Row, Col, Nav } from "react-bootstrap";
+import { useState, useEffect } from "react"
+import { Button, Container, Form, Table, Row, Col } from "react-bootstrap";
 import { evaluate } from 'mathjs'
+import axios from 'axios'
 
 import Plot from 'react-plotly.js';
 import 'bootstrap/dist/css/bootstrap.css';
 
-const Bisection = () => {
+const Bisection = (posts) => {   
+
+    const InputChange = () => {
+        console.log(posts.posts.Root_of_equation[0]);
+        setEquation(posts.posts.Root_of_equation[0].equation);
+        setXL(posts.posts.Root_of_equation[0].xl);
+        setXR(posts.posts.Root_of_equation[0].xr);
+    }
     const print = () =>{
         console.log(data)
         setValueIter(data.map((x)=>x.iteration));
@@ -98,14 +106,13 @@ const Bisection = () => {
     const [valueXl, setValueXl] = useState([]);
     const [valueXm, setValueXm] = useState([]);
     const [valueXr, setValueXr] = useState([]);
-    const [valueError, setValueError] = useState([]);
-     
+    const [valueError, setValueError] = useState([]);    
    
     const [html, setHtml] = useState(null);
     const [Equation,setEquation] = useState("(x^4)-13")
     const [X,setX] = useState(0)
     const [XL,setXL] = useState(0)
-    const [XR,setXR] = useState(0)
+    const [XR,setXR] = useState(0)    
 
     const inputEquation = (event) =>{
         console.log(event.target.value)
@@ -155,6 +162,9 @@ const Bisection = () => {
      
         setHtml(print());
     }
+    const exampleInput = () => {
+        InputChange();
+    }
 
     return (
         <Container fluid>
@@ -171,20 +181,23 @@ const Bisection = () => {
 
                         <Form.Group as={Row} className="mb-3">                        
                             <Form.Label column sm={2} className="text-center">Input XL</Form.Label>
-                            <Col sm={10}><input type="number" id="XL" onChange={inputXL} style={{width:"100%"}} className="form-control"></input></Col>                        
+                            <Col sm={10}><input type="number" id="XL" value={XL} onChange={inputXL} style={{width:"100%"}} className="form-control"></input></Col>                        
                         </Form.Group>
 
                         <Form.Group as={Row} className="mb-3">
                             <Form.Label column sm={2} className="text-center">Input XR</Form.Label>
-                            <Col sm={10}><input type="number" id="XR" onChange={inputXR} style={{width:"100%"}} className="form-control"></input></Col>
+                            <Col sm={10}><input type="number" id="XR" value={XR} onChange={inputXR} style={{width:"100%"}} className="form-control"></input></Col>
                         </Form.Group>
 
-                        <center><Button variant="dark" onClick={calculateRoot}>Calculate</Button></center>
-                 </Form>
-                
-                 <br />
-                 <h5>Answer = {X.toPrecision(7)}</h5>
-                 {html}
+                        
+                    </Form>
+                    <center>
+                        <Button variant="dark" onClick={exampleInput} style={{margin:"50px"}}>Example Problem</Button>
+                        <Button variant="dark" onClick={calculateRoot}>Calculate</Button>
+                    </center>
+                    <br />
+                    <h5>Answer = {X.toPrecision(7)}</h5>
+                    {html}
                 </Col>
                 <Col sm={5}>
                     <Plot data={plot} layout={layout} />
