@@ -1,5 +1,5 @@
 {
-    "numer":{
+    "Root": {
         "Root_of_equation": [
             {
                 "title" : "Bisection",
@@ -35,6 +35,14 @@
                 "equation" : "x^3 + 2x^2 + x - 1",
                 "x0" : 0,
                 "x1" : 1
+            }
+        ]
+    },
+    "Linear" : {
+        "Linear_Algebra" : [
+            {
+                "title" : "CramerRule"
+                
             }
         ]
     }

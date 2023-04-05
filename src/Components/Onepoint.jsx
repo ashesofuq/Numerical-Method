@@ -1,15 +1,22 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Button, Container, Form, Table, Row, Col } from "react-bootstrap";
 import { evaluate } from 'mathjs'
 import Plot from 'react-plotly.js';
+import axios from 'axios'
 import 'bootstrap/dist/css/bootstrap.css';
 
-const Onepoint =(posts)=>{
+const Onepoint =()=>{
+
+    const [JsonData, setJsonData] = useState(null)
+    useEffect(() => {
+        axios.get('http://localhost:3000/Root')
+            .then((response) => setJsonData(response.data))
+    }, [])
 
     const InputChange = () => {
-        console.log(posts.posts.Root_of_equation[2]);
-        setEquation(posts.posts.Root_of_equation[2].equation);
-        setX0(posts.posts.Root_of_equation[2].x0);
+        console.log(JsonData.Root_of_equation[2]);
+        setEquation(JsonData.Root_of_equation[2].equation);
+        setX0(JsonData.Root_of_equation[2].x0);
     }
 
     const print = () =>{

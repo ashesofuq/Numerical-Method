@@ -1,16 +1,23 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Button, Container, Form, Table, Row, Col } from "react-bootstrap";
 import { evaluate } from 'mathjs'
 import Plot from 'react-plotly.js';
+import axios from 'axios'
 import 'bootstrap/dist/css/bootstrap.css';
 
-const FalsePosition =(posts)=>{
+const FalsePosition =()=>{
+
+    const [JsonData, setJsonData] = useState(null)
+    useEffect(() => {
+        axios.get('http://localhost:3000/Root')
+            .then((response) => setJsonData(response.data))
+    }, [])
 
     const InputChange = () => {
-        console.log(posts.posts.Root_of_equation[1]);
-        setEquation(posts.posts.Root_of_equation[1].equation);
-        setXL(posts.posts.Root_of_equation[1].xl);
-        setXR(posts.posts.Root_of_equation[1].xr);
+        console.log(JsonData.Root_of_equation[1]);
+        setEquation(JsonData.Root_of_equation[1].equation);
+        setXL(JsonData.Root_of_equation[1].xl);
+        setXR(JsonData.Root_of_equation[1].xr);
     }
 
     const print = () =>{

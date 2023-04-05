@@ -69,7 +69,7 @@ const CramerRule =()=>{
             }
             let detAx = det(Ax);
             data.push(detAx / detA);
-        }
+        }        
     }
 
       

@@ -1,17 +1,24 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Button, Container, Form, Table, Row, Col } from "react-bootstrap";
 import { evaluate, derivative, factorial } from 'mathjs'
 import Plot from 'react-plotly.js';
+import axios from 'axios'
 import 'bootstrap/dist/css/bootstrap.css';
 
-const Taylor =(posts)=>{
+const Taylor =()=>{
+
+    const [JsonData, setJsonData] = useState(null)
+    useEffect(() => {
+        axios.get('http://localhost:3000/Root')
+            .then((response) => setJsonData(response.data))
+    }, [])
 
     const InputChange = () => {
-        console.log(posts.posts.Root_of_equation[3]);
-        setEquation(posts.posts.Root_of_equation[3].equation);
-        setX0(posts.posts.Root_of_equation[3].x0);
-        setXa(posts.posts.Root_of_equation[3].x);
-        setN(posts.posts.Root_of_equation[3].n);
+        console.log(JsonData.Root_of_equation[3]);
+        setEquation(JsonData.Root_of_equation[3].equation);
+        setX0(JsonData.Root_of_equation[3].x0);
+        setXa(JsonData.Root_of_equation[3].x);
+        setN(JsonData.Root_of_equation[3].n);
     }
 
     const print = () =>{

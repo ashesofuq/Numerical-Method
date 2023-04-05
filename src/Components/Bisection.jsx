@@ -6,14 +6,22 @@ import axios from 'axios'
 import Plot from 'react-plotly.js';
 import 'bootstrap/dist/css/bootstrap.css';
 
-const Bisection = (posts) => {   
+const Bisection = () => { 
+    // ล่าสุด -> แก้ API ให้เป็นตามเด้านล่างนี้
+    const [JsonData, setJsonData] = useState(null)
+    useEffect(() => {
+        axios.get('http://localhost:3000/Root')
+            .then((response) => setJsonData(response.data))
+    }, [])
 
     const InputChange = () => {
-        console.log(posts.posts.Root_of_equation[0]);
-        setEquation(posts.posts.Root_of_equation[0].equation);
-        setXL(posts.posts.Root_of_equation[0].xl);
-        setXR(posts.posts.Root_of_equation[0].xr);
+        console.log(JsonData.Root_of_equation[0]);
+        setEquation(JsonData.Root_of_equation[0].equation);
+        setXL(JsonData.Root_of_equation[0].xl);
+        setXR(JsonData.Root_of_equation[0].xr);
     }
+
+
     const print = () =>{
         console.log(data)
         setValueIter(data.map((x)=>x.iteration));

@@ -4,47 +4,67 @@ import { det } from 'mathjs'
 
 import 'bootstrap/dist/css/bootstrap.css';
 
-const GaussElimination =()=>{
+const GaussEliminate =()=>{
     const print = () =>{
-        console.log(data)        
+        const newData = data.flat();
+        
+        let result = 0;
+        let str = '';
+        const check = [];
+        const labels = [];
+        for (let i=0; i<A.length; i++){
+            for (let j=0; j<A.length; j++){
+                result += newData[j] * A[i][j];
+                str += A[i][j] + `(${newData[j]}) + `;
+            }
+            str = str.slice(0, -2);
+            str += `= ${result}`
+            check.push(result);
+            labels.push(str);
+            result = 0;
+            str = '';
+        }
+        console.log(A);
+        console.log(newData);
+        console.log(check);
+        console.log(labels);
         return(
             
             <Container>
-                {data.map((element, i) => {
+                {newData.map((element, i) => {
                     return (
                         <div key={i}>
                             X{i+1}={element}
                         </div>
                     )
                 })}
+                {/* {check.map((element, i) => {
+                    return (
+                        <div key={i}>{element}</div>
+                    )
+                })} */}
+                <br />
+                <h5>Check Answer</h5>
+                {labels.map((element, i) => {
+                    return (
+                        <div key={i}>{element}</div>
+                    )
+                })}
+                                
             </Container>
            
         );
     }
-    
-
-    
-    const data =[];
-   
-    const CalGaussElimination = (A, B) => {
-        let detA = det(A)
-        if (detA === 0) {
-            return;
-        }
+ 
+    const data =[];   
+    const CalGaussEliminate = (A, B) => {
         
-        for (let i=0; i<A.length; i++) {
-            let Ax = A.map(value => value.slice());
-            for (let j=0; j<Ax.length; j++){
-                Ax[j][i] = B[j];
-            }
-            let detAx = det(Ax);
-            data.push(detAx / detA);
-        }
     }
 
+
     const [html, setHtml] = useState(null);        
-    const [A,setA] = useState([])
-    const [B,setB] = useState([])
+    const [A, setA] = useState([])
+    const [B, setB] = useState([])
 
     const [size, setSize] = useState(0);
     const [matrix, setMatrix] = useState([]);
@@ -74,7 +94,7 @@ const GaussElimination =()=>{
                 return row;
             }
         });
-        console.log(newMatrix);
+        // console.log(newMatrix);
         const newA = newMatrix.map(row => row.slice(0, -1));
         const newB = newMatrix.map(row => row[newMatrix.length]);
         console.log(newA);
@@ -85,26 +105,30 @@ const GaussElimination =()=>{
     }
  
     const calculateMatrix = () =>{        
-        CalGaussElimination(A, B);
+        CalGaussEliminate(A, B);
         setHtml(print());
         
     }
-    
+    const exampleInput = () => {
+
+    }
+
     return (
-            <Container fluid="md">
-                <center>
+        <Container fluid="md">
+            <center>
                 <br />
-                <h2>GaussElimination Method</h2>
+                <h2>GaussEliminate Method</h2>
                 <br />
-                <Row>                    
-                    <Col>                    
+                <Row>
+                    <Col>
                     <Form>
                         <Form.Group className="mb-3">
                             <Form.Label column sm={2}>Input Matrix Size</Form.Label>
                             <Col sm={2}><input type="number" id="InputSize" onChange={SizeChange} style={{width:"100%"}} className="form-control"></input></Col>
                         </Form.Group>
                         <p>Matrix {size} x {size}</p>
-                        {matrix.map((row, i) => (
+                        
+                        {matrix.map((row, i) => (                            
                             <div key={i}>
                                 {row.map((col, j) => (
                                     <React.Fragment key={j}>
@@ -114,20 +138,21 @@ const GaussElimination =()=>{
                                 ))}
                                 <br />
                             </div>
-                        ))}      
+                        ))}
                         <br />
+                        <Button variant="dart" onClick={exampleInput}>Click!!</Button>
                         <Button variant="dark" onClick={calculateMatrix}>Calculate</Button>
-                        <br />                        
+                        <br />
                     </Form>
                 
                     <br></br>
                     <h5>Answer</h5><br />
-                    <Container fluid>{html}</Container>
+                    <Container fluid>{html}</Container>                    
                     </Col>
                 </Row>       
-                </center>
-            </Container>           
+            </center>
+        </Container>           
     )
 }
 
-export default GaussElimination
+export default GaussEliminate
