@@ -1,10 +1,28 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { Button, Container, Form, Table, Row, Col } from "react-bootstrap";
 import { det } from 'mathjs'
+import axios from 'axios'
 
 import 'bootstrap/dist/css/bootstrap.css';
 
 const CramerRule =()=>{
+    const [JsonData, setJsonData] = useState(null)
+    useEffect(() => {
+        axios.get('http://localhost:3000/CramerRule')
+            .then((response) => setJsonData(response.data))
+    }, [])
+
+    const InputChange = () => {
+        console.log(JsonData[0]);
+        const newMatrix = JsonData[0].values;
+        const newA = newMatrix.map(row => row.slice(0, -1));
+        const newB = newMatrix.map(row => row[newMatrix.length]);
+        setMatrix(JsonData[0].values);
+        setA(newA);
+        setB(newB);
+        setSize(JsonData[0].size);
+    }
+
     const print = () =>{
         let result = 0;
         let str = '';
@@ -123,7 +141,7 @@ const CramerRule =()=>{
         
     }
     const exampleInput = () => {
-
+        InputChange();
     }
 
     // const headerMatrix = Array.from({ length: size }, (_, i) => `x${i+1}`);
@@ -140,7 +158,7 @@ const CramerRule =()=>{
                     <Form>
                         <Form.Group className="mb-3">
                             <Form.Label column sm={2}>Input Matrix Size</Form.Label>
-                            <Col sm={2}><input type="number" id="InputSize" onChange={SizeChange} style={{width:"100%"}} className="form-control"></input></Col>
+                            <Col sm={2}><input type="number" id="InputSize" value={size} onChange={SizeChange} style={{width:"100%"}} className="form-control"></input></Col>
                         </Form.Group>
                         <p>Matrix {size} x {size}</p>
                         {/* <br />
@@ -175,7 +193,7 @@ const CramerRule =()=>{
                             </div>
                         ))}      
                         <br />
-                        <Button variant="dart" onClick={exampleInput}>Click!!</Button>
+                        <Button variant="White" onClick={exampleInput}>Example</Button>
                         <Button variant="dark" onClick={calculateMatrix}>Calculate</Button>
                         <br />                        
                     </Form>

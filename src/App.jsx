@@ -14,7 +14,7 @@ import CramerRule from "./Components/Linear/CramerRule";
 import MatrixInversion from "./Components/Linear/MatrixInversion";
 import SimpleRegression from "./Components/Regression/SimpleRegression";
 import Polynomial from "./Components/Regression/Polynomial";
-import Multiple from "./Components/Regression/Multiple";
+// import Multiple from "./Components/Regression/Multiple";
 import Test from "./Components/Linear/test";
 
 import { NavDropdown, Container, Nav, Navbar } from 'react-bootstrap';
@@ -32,7 +32,7 @@ function App() {
     return (
         <BrowserRouter>          
           <Navbar collapseOnSelect expand="lg" variant="dark" bg="dark">
-           <Container fluid>
+           <Container fluid="md">
             <Navbar.Brand href="/">Numerical Method</Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
@@ -50,20 +50,20 @@ function App() {
                   <NavDropdown.Item as={NavLink} to="/MatrixInversion">Matrix Inversion</NavDropdown.Item>
                   {/* <NavDropdown.Item as={NavLink} to="/GaussEliminate">Gauss Elimination</NavDropdown.Item> */}
                   {/* <NavDropdown.Item as={NavLink} to="/">Gauss Jordan</NavDropdown.Item> */}
-                  <NavDropdown.Item as={NavLink} to="/test">Test</NavDropdown.Item>
+                  {/* <NavDropdown.Item as={NavLink} to="/test">Test</NavDropdown.Item> */}
                 </NavDropdown>
                 <NavDropdown title="Regression" id="collasible-nav-dropdown">
                   <NavDropdown.Item as={NavLink} to="/SimpleRegression">Simple Linear</NavDropdown.Item>
                   <NavDropdown.Item as={NavLink} to="/Polynomial">Polynomial Linear</NavDropdown.Item>
-                  <NavDropdown.Item as={NavLink} to="/Multiple">Multiple Linear</NavDropdown.Item>
-                  <NavDropdown.Item as={NavLink} to="/test">Test</NavDropdown.Item>
+                  {/* <NavDropdown.Item as={NavLink} to="/Multiple">Multiple Linear</NavDropdown.Item> */}
+                  {/* <NavDropdown.Item as={NavLink} to="/test">Test</NavDropdown.Item> */}
                 </NavDropdown>
               </Nav>              
             </Navbar.Collapse>
 
             <Navbar.Collapse className="justify-content-end">
               <Nav>
-                <Nav.Link href="/">Contact Me</Nav.Link>
+                <Nav.Link href="https://www.facebook.com/jeerapong.sanpo" target="_blank">Contact Me</Nav.Link>
               </Nav>
             </Navbar.Collapse>
            </Container>
@@ -81,7 +81,7 @@ function App() {
             <Route path="/MatrixInversion" element={<MatrixInversion />} />
             <Route path="/SimpleRegression" element={<SimpleRegression />} />
             <Route path="/Polynomial" element={<Polynomial />} />
-            <Route path="/Multiple" element={<Multiple />} />
+            {/* <Route path="/Multiple" element={<Multiple />} /> */}
             <Route path="/test" element={<Test />} />
           </Routes>
           

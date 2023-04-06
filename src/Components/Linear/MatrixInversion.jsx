@@ -1,13 +1,50 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { Button, Container, Form, Table, Row, Col } from "react-bootstrap";
 import { inv, multiply } from 'mathjs'
+import axios from 'axios'
 
 import 'bootstrap/dist/css/bootstrap.css';
 
 const MatrixInversion =()=>{
+    const [JsonData, setJsonData] = useState(null)
+    useEffect(() => {
+        axios.get('http://localhost:3000/MatrixInversion')
+            .then((response) => setJsonData(response.data))
+    }, [])
+
+    const InputChange = () => {
+        console.log(JsonData[0]);
+        const newMatrix = JsonData[0].values;
+        const newA = newMatrix.map(row => row.slice(0, -1));
+        const newB = newMatrix.map(row => row[newMatrix.length]);
+        setMatrix(JsonData[0].values);
+        setA(newA);
+        setB(newB);    
+        setSize(JsonData[0].size);
+    }
+
     const print = () =>{
         const newData = data.flat();
+        let result = 0;
+        let str = '';
+        const check = [];
+        const labels = [];
+        for (let i=0; i<A.length; i++){
+            for (let j=0; j<A.length; j++){
+                result += newData[j] * A[i][j];         
+                str += A[i][j] + `(${newData[j].toPrecision(7)}) + `;
+            }
+            str = str.slice(0, -2);
+            str += `= ${result.toPrecision(7)}`
+            check.push(result);
+            labels.push(str);
+            result = 0;
+            str = '';
+        } 
         console.log(newData);
+        console.log(check);
+        console.log(labels);
+        
         return(            
             <Container>
                 {newData.map((element, i) => {
@@ -15,6 +52,13 @@ const MatrixInversion =()=>{
                         <div key={i}>
                             X{i+1}={element.toPrecision(7)}
                         </div>
+                    )
+                })}
+                <br />
+                <h5>Check Answer</h5>
+                {labels.map((element, i) => {
+                    return (
+                        <div key={i}>{element}</div>
                     )
                 })}
             </Container>
@@ -73,10 +117,12 @@ const MatrixInversion =()=>{
     }
  
     const calculateMatrix = () =>{        
-        CalMatrixInversion(A, B);
-       
-        setHtml(print());
-        
+        CalMatrixInversion(A, B);       
+        setHtml(print());        
+    }
+
+    const exampleInput = () => {
+        InputChange();
     }
     
     return (
@@ -90,7 +136,7 @@ const MatrixInversion =()=>{
                     <Form>
                         <Form.Group className="mb-3">
                             <Form.Label column sm={2}>Input Matrix Size</Form.Label>
-                            <Col sm={2}><input type="number" id="InputSize" onChange={SizeChange} style={{width:"100%"}} className="form-control"></input></Col>
+                            <Col sm={2}><input type="number" id="InputSize" value={size} onChange={SizeChange} style={{width:"100%"}} className="form-control"></input></Col>
                         </Form.Group>
                         <p>Matrix {size} x {size}</p>
                         {matrix.map((row, i) => (
@@ -105,6 +151,7 @@ const MatrixInversion =()=>{
                             </div>
                         ))}      
                         <br />
+                        <Button variant="white" onClick={exampleInput}>Example</Button>
                         <Button variant="dark" onClick={calculateMatrix}>Calculate</Button>
                         <br />                        
                     </Form>

@@ -10,15 +10,15 @@ const Bisection = () => {
     // ล่าสุด -> แก้ API ให้เป็นตามเด้านล่างนี้
     const [JsonData, setJsonData] = useState(null)
     useEffect(() => {
-        axios.get('http://localhost:3000/Root')
+        axios.get('http://localhost:3000/Bisection')
             .then((response) => setJsonData(response.data))
     }, [])
 
     const InputChange = () => {
-        console.log(JsonData.Root_of_equation[0]);
-        setEquation(JsonData.Root_of_equation[0].equation);
-        setXL(JsonData.Root_of_equation[0].xl);
-        setXR(JsonData.Root_of_equation[0].xr);
+        console.log(JsonData[0]);
+        setEquation(JsonData[0].equation);
+        setXL(JsonData[0].xl);
+        setXR(JsonData[0].xr);
     }
 
 

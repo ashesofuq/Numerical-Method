@@ -9,14 +9,14 @@ const Onepoint =()=>{
 
     const [JsonData, setJsonData] = useState(null)
     useEffect(() => {
-        axios.get('http://localhost:3000/Root')
+        axios.get('http://localhost:3000/OnePoint')
             .then((response) => setJsonData(response.data))
     }, [])
 
     const InputChange = () => {
-        console.log(JsonData.Root_of_equation[2]);
-        setEquation(JsonData.Root_of_equation[2].equation);
-        setX0(JsonData.Root_of_equation[2].x0);
+        console.log(JsonData[0]);
+        setEquation(JsonData[0].equation);
+        setX0(JsonData[0].x0);
     }
 
     const print = () =>{

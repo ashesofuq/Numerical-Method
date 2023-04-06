@@ -9,16 +9,16 @@ const Taylor =()=>{
 
     const [JsonData, setJsonData] = useState(null)
     useEffect(() => {
-        axios.get('http://localhost:3000/Root')
+        axios.get('http://localhost:3000/Taylor')
             .then((response) => setJsonData(response.data))
     }, [])
 
     const InputChange = () => {
-        console.log(JsonData.Root_of_equation[3]);
-        setEquation(JsonData.Root_of_equation[3].equation);
-        setX0(JsonData.Root_of_equation[3].x0);
-        setXa(JsonData.Root_of_equation[3].x);
-        setN(JsonData.Root_of_equation[3].n);
+        console.log(JsonData[0]);
+        setEquation(JsonData[0].equation);
+        setX0(JsonData[0].x0);
+        setXa(JsonData[0].x);
+        setN(JsonData[0].n);
     }
 
     const print = () =>{

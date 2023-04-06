@@ -1,60 +1,80 @@
 {
-    "Root": {
-        "Root_of_equation": [
-            {
-                "title" : "Bisection",
-                "equation" : "x^2 - 3",
-                "xl" : 1,
-                "xr" : 2
-            },
-            {
-                "title" : "FalsePostion",
-                "equation" : "x^2 + 5x - 9",
-                "xl" : -10,
-                "xr" : 0
-            },
-            {
-                "title" : "OnePoint",
-                "equation" : "((2x+5)/2)^(1/3)",
-                "x0" : 0
-            },
-            {
-                "title" : "Taylor",
-                "equation" : "3x^2 + 5x + 2",
-                "x0" : 0,
-                "x" : 3,
-                "n" : 3
-            },
-            {
-                "title" : "Newton",
-                "equation" : "x^3 - x - 1",
-                "x0" : 2
-            },
-            {
-                "title" : "Secant",
-                "equation" : "x^3 + 2x^2 + x - 1",
-                "x0" : 0,
-                "x1" : 1
-            }
-        ]
-    },
-    "Linear" : {
-        "Linear_Algebra" : [
-            {
-                "title" : "CramerRule"
-                
-            }
-        ]
-    },
-    "Regression" : {
-        "Regression" : [
-            {
-                "title" : "Simple Linear",
-                "values" : [[10, 15, 20, 25, 30, 35], [2.2, 4.6, 4.2, 7, 6.6, 9.2]],
-                "x" : 27,
-                "n" : 6
-            }
-        ]
-    }
+    "Bisection" : [
+        {
+            "id" : 0,
+            "equation" : "x^2 - 3",
+            "xl" : 1,
+            "xr" : 2
+        }
+    ],
+    "FalsePostion" : [
+        {
+            "id" : 0,
+            "equation" : "x^2 + 5x - 9",
+            "xl" : -10,
+            "xr" : 0
+        }
+    ],
+    "OnePoint" : [
+        {
+            "id" : 0,
+            "equation" : "((2x+5)/2)^(1/3)",
+            "x0" : 0
+        }
+    ],
+    "Taylor" : [
+        {
+            "id" : 0,
+            "equation" : "3x^2 + 5x + 2",
+            "x0" : 0,
+            "x" : 3,
+            "n" : 3
+        }
+    ],
+    "Newton" : [
+        {
+            "id" : 0,
+            "equation" : "x^3 - x - 1",
+            "x0" : 2
+        }
+    ],
+    "Secant" : [
+        {
+            "id" : 0,
+            "equation" : "x^3 + 2x^2 + x - 1",
+            "x0" : 0,
+            "x1" : 1
+        }
+    ],
+    "CramerRule" : [
+        {
+            "id" : 0,
+            "size" : 3,
+            "values" : [[2, 3, 5, 0], [3, 1, -2, -2], [1, 3, 4, -3]]
+        }
+    ],
+    "MatrixInversion" : [
+        {
+            "id" : 0,
+            "size" : 3,
+            "values" : [[2, 3, 5, 1], [3, 1, -2, -2], [1, 3, 4, -3]]
+        }
+    ],
+    "SimpleLinearRegression" : [
+        {
+            "id" : 0,
+            "values" : [[10, 15, 20, 25, 30, 35], [2.2, 4.6, 4.2, 7, 6.6, 9.2]],
+            "x" : 27,
+            "n" : 6
+        }
+    ],
+    "PolynomialLinearRegression" : [
+        {
+            "id" : 0,
+            "values" : [[10, 15, 20, 25, 30, 35], [2.2, 4.6, 4.2, 7, 6.6, 9.2]],
+            "x" : 27,
+            "n" : 6,
+            "order" : 2
+        }
+    ]
 }
-

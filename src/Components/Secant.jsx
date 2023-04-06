@@ -9,15 +9,15 @@ const Secant =(posts)=>{
 
     const [JsonData, setJsonData] = useState(null)
     useEffect(() => {
-        axios.get('http://localhost:3000/Root')
+        axios.get('http://localhost:3000/Secant')
             .then((response) => setJsonData(response.data))
     }, [])
 
     const InputChange = () => {
-        console.log(JsonData.Root_of_equation[5]);
-        setEquation(JsonData.Root_of_equation[5].equation);
-        setX0(JsonData.Root_of_equation[5].x0);
-        setX1(JsonData.Root_of_equation[5].x1);
+        console.log(JsonData[0]);
+        setEquation(JsonData[0].equation);
+        setX0(JsonData[0].x0);
+        setX1(JsonData[0].x1);
     }
 
     const print = () =>{

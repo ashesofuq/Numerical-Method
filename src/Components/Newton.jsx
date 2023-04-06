@@ -9,14 +9,14 @@ const Newton =()=>{
 
     const [JsonData, setJsonData] = useState(null)
     useEffect(() => {
-        axios.get('http://localhost:3000/Root')
+        axios.get('http://localhost:3000/Newton')
             .then((response) => setJsonData(response.data))
     }, [])
 
     const InputChange = () => {
-        console.log(JsonData.Root_of_equation[4]);
-        setEquation(JsonData.Root_of_equation[4].equation);
-        setX0(JsonData.Root_of_equation[4].x0);
+        console.log(JsonData[0]);
+        setEquation(JsonData[0].equation);
+        setX0(JsonData[0].x0);
     }
 
     const print = () =>{

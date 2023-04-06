@@ -1,8 +1,8 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { Button, Container, Form, Table, Row, Col } from "react-bootstrap";
 import { inv, multiply, transpose } from 'mathjs'
 import Plot from 'react-plotly.js';
-
+import axios from 'axios'
 
 import 'bootstrap/dist/css/bootstrap.css';
 
@@ -61,8 +61,8 @@ const Multiple =()=>{
         // const lineX = [];
         // const lineY = [];
 
-        // for (let i = 0; i < xValues.length; i++) {
-        //     const val = xValues[i];
+        // for (let i = 0; i < xValues[0].length; i++) {
+        //     const val = xValues[i][i];
         //     let yVal = 0;
 
         //     for (let j = 0; j < data2.length; j++) {
@@ -167,7 +167,7 @@ const Multiple =()=>{
         
     }
     const exampleInput = () => {
-
+        // InputChange();
     }
  
     return (
@@ -205,7 +205,7 @@ const Multiple =()=>{
                         </div>
                     ))}      
                     <br />
-                    <Button variant="dart" onClick={exampleInput}>Click!!</Button>
+                    <Button variant="white" onClick={exampleInput}>Example</Button>
                     <Button variant="dark" onClick={calculateMatrix}>Calculate</Button>
                     <br />
                 </Form>

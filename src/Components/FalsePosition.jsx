@@ -9,15 +9,15 @@ const FalsePosition =()=>{
 
     const [JsonData, setJsonData] = useState(null)
     useEffect(() => {
-        axios.get('http://localhost:3000/Root')
+        axios.get('http://localhost:3000/FalsePostion')
             .then((response) => setJsonData(response.data))
     }, [])
 
     const InputChange = () => {
-        console.log(JsonData.Root_of_equation[1]);
-        setEquation(JsonData.Root_of_equation[1].equation);
-        setXL(JsonData.Root_of_equation[1].xl);
-        setXR(JsonData.Root_of_equation[1].xr);
+        console.log(JsonData[0]);
+        setEquation(JsonData[0].equation);
+        setXL(JsonData[0].xl);
+        setXR(JsonData[0].xr);
     }
 
     const print = () =>{

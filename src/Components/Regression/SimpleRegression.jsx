@@ -10,15 +10,17 @@ const SimpleRegression =()=>{
 
     const [JsonData, setJsonData] = useState(null)
     useEffect(() => {
-        axios.get('http://localhost:3000/Regression')
+        axios.get('http://localhost:3000/SimpleLinearRegression')
             .then((response) => setJsonData(response.data))
     }, [])
 
     const InputChange = () => {
-        console.log(JsonData.Regression[0]);
-        setMatrix(JsonData.Regression[0].values);
-        setX(JsonData.Regression[0].x);
-        setSize(JsonData.Regression[0].n);
+        console.log(JsonData[0]);
+        setMatrix(JsonData[0].values);
+        setA(JsonData[0].values[0]);
+        setB(JsonData[0].values[1]);
+        setX(JsonData[0].x);
+        setSize(JsonData[0].n);
     }
 
     const print = () =>{
@@ -86,6 +88,7 @@ const SimpleRegression =()=>{
     const [xLine, setxLine] = useState(0)
     const [yLine, setyLine] = useState(0)
     const [Answer, setAnswer] = useState(0)
+    // const [firstInputValue, setFirstInputValue] = useState(0);
 
     const [size, setSize] = useState(0);
     const [matrix, setMatrix] = useState([]);
@@ -105,9 +108,9 @@ const SimpleRegression =()=>{
         setMatrix(newMatrix);
     }
 
-    const NumberChange = (event, rowIndex, ColIndex) => {
+    const NumberChange = (event, rowIndex, ColIndex) => {        
         const InputValue = parseFloat(event.target.value);
-
+        
         const newMatrix = matrix.map((row, i) => {
             if (i === rowIndex) {
                 return row.map((col, j) => (j === ColIndex ? InputValue : col));
@@ -115,15 +118,23 @@ const SimpleRegression =()=>{
                 return row;
             }
         });
+
         console.log(newMatrix);
         setMatrix(newMatrix);
+
         const newA = newMatrix[0];
         const newB = newMatrix[1];
         console.log(newA);
         console.log(newB);
         setA(newA);
-        setB(newB);        
+        setB(newB);
     }
+
+    // const UpdateMatrix = () => {
+    //     const newMatrix = [...matrix];
+    //     newMatrix[0][0] -= 0;
+    //     setMatrix(newMatrix);        
+    // }
 
     const InputX = (event) =>{
         console.log(event.target.value)
@@ -188,7 +199,7 @@ const SimpleRegression =()=>{
                             <label style={{marginRight:"20px"}}>{i === 0 ? "X" : "Y"}</label>
                             {row.map((col, j) => (
                                 <React.Fragment key={j}>
-                                    <input type="number" step="any" value={col} onChange={(event) => NumberChange(event, i, j)} 
+                                    <input type="number" step="any" value={col} onChange={(event) => NumberChange(event, i, j)}
                                         style={{ margin:"1px", width:"3em", background:"white", color:"black", border:"1px solid black", borderRadius:"5px"}} />
                                 </React.Fragment>
                             ))}
@@ -196,7 +207,9 @@ const SimpleRegression =()=>{
                         </div>
                     ))}      
                     <br />
-                    <Button variant="dart" onClick={exampleInput}>Click!!</Button>
+                    
+                    {/* <Button variant="dart" onClick={UpdateMatrix}>update!!</Button> */}
+                    <Button variant="white" onClick={exampleInput}>Example</Button>
                     <Button variant="dark" onClick={calculateMatrix}>Calculate</Button>
                     <br />
                 </Form>

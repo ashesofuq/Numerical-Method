@@ -1,12 +1,28 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { Button, Container, Form, Table, Row, Col } from "react-bootstrap";
 import { inv, multiply } from 'mathjs'
 import Plot from 'react-plotly.js';
-
+import axios from 'axios'
 
 import 'bootstrap/dist/css/bootstrap.css';
 
 const Polynomial =()=>{
+    const [JsonData, setJsonData] = useState(null)
+    useEffect(() => {
+        axios.get('http://localhost:3000/PolynomialLinearRegression')
+            .then((response) => setJsonData(response.data))
+    }, [])
+
+    const InputChange = () => {
+        console.log(JsonData[0]);
+        setMatrix(JsonData[0].values);
+        setA(JsonData[0].values[0]);
+        setB(JsonData[0].values[1]);
+        setX(JsonData[0].x);
+        setSize(JsonData[0].n);        
+        setOrder(JsonData[0].order);
+    }
+
     const print = () =>{        
         const newData = data.flat();        
         console.log(newData);        
@@ -185,7 +201,7 @@ const Polynomial =()=>{
         
     }
     const exampleInput = () => {
-
+        InputChange();
     }
  
     return (
@@ -199,15 +215,15 @@ const Polynomial =()=>{
                 <Form>
                     <Form.Group className="mb-3">
                         <Form.Label column sm={2}>Input X</Form.Label>    
-                        <Col sm={2}><input type="number" id="InputX" onChange={InputX} style={{width:"100%"}} className="form-control"></input></Col>
+                        <Col sm={2}><input type="number" id="InputX" value={X} onChange={InputX} style={{width:"100%"}} className="form-control"></input></Col>
                     </Form.Group>
                     <Form.Group className="mb-3">
                         <Form.Label column sm={2}>Input Order</Form.Label>
-                        <Col sm={2}><input type="number" id="InputOrder" onChange={InputOrder} style={{width:"100%"}} className="form-control"></input></Col>
+                        <Col sm={2}><input type="number" id="InputOrder" value={Order} onChange={InputOrder} style={{width:"100%"}} className="form-control"></input></Col>
                     </Form.Group>
                     <Form.Group className="mb-3">
                         <Form.Label column sm={2}>Input Value Size</Form.Label>
-                        <Col sm={2}><input type="number" id="InputSize" onChange={SizeChange} style={{width:"100%"}} className="form-control"></input></Col>
+                        <Col sm={2}><input type="number" id="InputSize" value={size} onChange={SizeChange} style={{width:"100%"}} className="form-control"></input></Col>
                     </Form.Group>
                     
                     {matrix.map((row, i) => (
@@ -223,7 +239,7 @@ const Polynomial =()=>{
                         </div>
                     ))}      
                     <br />
-                    <Button variant="dart" onClick={exampleInput}>Click!!</Button>
+                    <Button variant="white" onClick={exampleInput}>Example</Button>
                     <Button variant="dark" onClick={calculateMatrix}>Calculate</Button>
                     <br />
                 </Form>
