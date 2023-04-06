@@ -1,12 +1,26 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { Button, Container, Form, Table, Row, Col } from "react-bootstrap";
 import { inv, multiply } from 'mathjs'
 import Plot from 'react-plotly.js';
-
+import axios from 'axios'
 
 import 'bootstrap/dist/css/bootstrap.css';
 
 const SimpleRegression =()=>{
+
+    const [JsonData, setJsonData] = useState(null)
+    useEffect(() => {
+        axios.get('http://localhost:3000/Regression')
+            .then((response) => setJsonData(response.data))
+    }, [])
+
+    const InputChange = () => {
+        console.log(JsonData.Regression[0]);
+        setMatrix(JsonData.Regression[0].values);
+        setX(JsonData.Regression[0].x);
+        setSize(JsonData.Regression[0].n);
+    }
+
     const print = () =>{
         const newData = data.flat();        
         // console.log(newData);
@@ -102,13 +116,13 @@ const SimpleRegression =()=>{
             }
         });
         console.log(newMatrix);
+        setMatrix(newMatrix);
         const newA = newMatrix[0];
         const newB = newMatrix[1];
         console.log(newA);
         console.log(newB);
         setA(newA);
-        setB(newB);
-        setMatrix(newMatrix);
+        setB(newB);        
     }
 
     const InputX = (event) =>{
@@ -148,7 +162,7 @@ const SimpleRegression =()=>{
         
     }
     const exampleInput = () => {
-
+        InputChange();
     }
  
     return (
@@ -162,11 +176,11 @@ const SimpleRegression =()=>{
                 <Form>
                     <Form.Group className="mb-3">
                         <Form.Label column sm={2}>Input X</Form.Label>    
-                        <Col sm={2}><input type="number" id="InputX" onChange={InputX} style={{width:"100%"}} className="form-control"></input></Col>
+                        <Col sm={2}><input type="number" id="InputX" value={X} onChange={InputX} style={{width:"100%"}} className="form-control"></input></Col>
                     </Form.Group>
                     <Form.Group className="mb-3">
                         <Form.Label column sm={2}>Input Value Size</Form.Label>
-                        <Col sm={2}><input type="number" id="InputSize" onChange={SizeChange} style={{width:"100%"}} className="form-control"></input></Col>
+                        <Col sm={2}><input type="number" id="InputSize" value={size} onChange={SizeChange} style={{width:"100%"}} className="form-control"></input></Col>
                     </Form.Group>
                     
                     {matrix.map((row, i) => (
