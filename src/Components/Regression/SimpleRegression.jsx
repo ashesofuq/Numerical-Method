@@ -10,7 +10,7 @@ const SimpleRegression =()=>{
 
     const [JsonData, setJsonData] = useState(null)
     useEffect(() => {
-        axios.get('http://localhost:3000/SimpleLinearRegression')
+        axios.get('http://localhost:3002/SimpleLinearRegression')
             .then((response) => setJsonData(response.data))
     }, [])
 

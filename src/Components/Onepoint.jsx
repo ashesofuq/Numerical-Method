@@ -9,7 +9,7 @@ const Onepoint =()=>{
 
     const [JsonData, setJsonData] = useState(null)
     useEffect(() => {
-        axios.get('http://localhost:3000/OnePoint')
+        axios.get('http://localhost:3002/OnePoint')
             .then((response) => setJsonData(response.data))
     }, [])
 

@@ -9,7 +9,7 @@ const Newton =()=>{
 
     const [JsonData, setJsonData] = useState(null)
     useEffect(() => {
-        axios.get('http://localhost:3000/Newton')
+        axios.get('http://localhost:3002/Newton')
             .then((response) => setJsonData(response.data))
     }, [])
 

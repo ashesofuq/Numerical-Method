@@ -9,7 +9,7 @@ const Taylor =()=>{
 
     const [JsonData, setJsonData] = useState(null)
     useEffect(() => {
-        axios.get('http://localhost:3000/Taylor')
+        axios.get('http://localhost:3002/Taylor')
             .then((response) => setJsonData(response.data))
     }, [])
 

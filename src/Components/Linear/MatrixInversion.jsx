@@ -8,7 +8,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 const MatrixInversion =()=>{
     const [JsonData, setJsonData] = useState(null)
     useEffect(() => {
-        axios.get('http://localhost:3000/MatrixInversion')
+        axios.get('http://localhost:3002/MatrixInversion')
             .then((response) => setJsonData(response.data))
     }, [])
 

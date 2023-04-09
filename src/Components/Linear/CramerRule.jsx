@@ -8,7 +8,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 const CramerRule =()=>{
     const [JsonData, setJsonData] = useState(null)
     useEffect(() => {
-        axios.get('http://localhost:3000/CramerRule')
+        axios.get('http://localhost:3002/CramerRule')
             .then((response) => setJsonData(response.data))
     }, [])
 

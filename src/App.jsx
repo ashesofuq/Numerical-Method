@@ -4,6 +4,7 @@ import React from "react";
 // import './App.css';
 
 import Header from './Components/Home';
+import LoginPage from "./Components/Login";
 import Bisection from './Components/Bisection';
 import FalsePosition from './Components/FalsePosition';
 import Onepoint from "./Components/Onepoint";
@@ -18,17 +19,9 @@ import Polynomial from "./Components/Regression/Polynomial";
 import Test from "./Components/Linear/test";
 
 import { NavDropdown, Container, Nav, Navbar } from 'react-bootstrap';
-
 import { BrowserRouter, NavLink, Routes, Route } from 'react-router-dom'
 
-
-function App() {    
-    // const [Res, setRes] = useState(null)
-    // useEffect(() => {
-    //     axios.get('http://localhost:3000/numer')
-    //         .then((Res) => setRes(Res.data))
-    //     console.log(Res);
-    // }, [])
+function App() {
     return (
         <BrowserRouter>          
           <Navbar collapseOnSelect expand="lg" variant="dark" bg="dark">
@@ -56,13 +49,15 @@ function App() {
                   <NavDropdown.Item as={NavLink} to="/SimpleRegression">Simple Linear</NavDropdown.Item>
                   <NavDropdown.Item as={NavLink} to="/Polynomial">Polynomial Linear</NavDropdown.Item>
                   {/* <NavDropdown.Item as={NavLink} to="/Multiple">Multiple Linear</NavDropdown.Item> */}
-                  {/* <NavDropdown.Item as={NavLink} to="/test">Test</NavDropdown.Item> */}
+                  {/* <NavDropdown.Item as={NavLink} to="/LoginPage">LoginPage</NavDropdown.Item> */}
                 </NavDropdown>
               </Nav>              
             </Navbar.Collapse>
 
             <Navbar.Collapse className="justify-content-end">
-              <Nav>
+              <Nav>                
+                <Nav.Link href="/LoginPage">Admin</Nav.Link>
+                <Nav.Link href="http://localhost:3001/api-docs/" target="_blank">Swagger</Nav.Link>
                 <Nav.Link href="https://www.facebook.com/jeerapong.sanpo" target="_blank">Contact Me</Nav.Link>
               </Nav>
             </Navbar.Collapse>
@@ -71,6 +66,7 @@ function App() {
 
           <Routes>
             <Route path="/" element={<Header />} />
+            <Route path="/LoginPage" element={<LoginPage />} />
             <Route path="/Bisection" element={<Bisection />} />
             <Route path="/FalsePosition" element={<FalsePosition  />} />
             <Route path="/OnePoint" element={<Onepoint  />} />

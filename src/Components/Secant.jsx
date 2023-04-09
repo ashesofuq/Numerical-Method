@@ -9,7 +9,7 @@ const Secant =(posts)=>{
 
     const [JsonData, setJsonData] = useState(null)
     useEffect(() => {
-        axios.get('http://localhost:3000/Secant')
+        axios.get('http://localhost:3002/Secant')
             .then((response) => setJsonData(response.data))
     }, [])
 

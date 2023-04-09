@@ -9,7 +9,7 @@ const FalsePosition =()=>{
 
     const [JsonData, setJsonData] = useState(null)
     useEffect(() => {
-        axios.get('http://localhost:3000/FalsePostion')
+        axios.get('http://localhost:3002/FalsePostion')
             .then((response) => setJsonData(response.data))
     }, [])
 

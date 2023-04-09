@@ -10,7 +10,7 @@ const Bisection = () => {
     // ล่าสุด -> แก้ API ให้เป็นตามเด้านล่างนี้
     const [JsonData, setJsonData] = useState(null)
     useEffect(() => {
-        axios.get('http://localhost:3000/Bisection')
+        axios.get('http://localhost:3002/Bisection')
             .then((response) => setJsonData(response.data))
     }, [])
 

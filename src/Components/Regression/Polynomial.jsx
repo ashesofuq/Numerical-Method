@@ -9,7 +9,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 const Polynomial =()=>{
     const [JsonData, setJsonData] = useState(null)
     useEffect(() => {
-        axios.get('http://localhost:3000/PolynomialLinearRegression')
+        axios.get('http://localhost:3002/PolynomialLinearRegression')
             .then((response) => setJsonData(response.data))
     }, [])
 
