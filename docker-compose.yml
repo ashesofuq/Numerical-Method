@@ -1,0 +1,11 @@
+version: '3.8'
+services:
+  react-web:
+    image: react-web
+    ports: 
+      - 5173:5173
+  react-server:
+    image: react-server
+    ports: 
+      - 3001:3001
+      - 3002:3002
