@@ -10,8 +10,14 @@ const Bisection = () => {
     // ล่าสุด -> แก้ API ให้เป็นตามเด้านล่างนี้
     const [JsonData, setJsonData] = useState(null)
     useEffect(() => {
-        axios.get('http://localhost:3002/Bisection')
+        const instance = axios.create({
+            baseURL: 'http://localhost:3001',
+            headers: {'api_key': '2xzPJaiqBYGXnsDJhGVKCt'}
+        });
+        instance.get('/Bisection')
             .then((response) => setJsonData(response.data))
+        // axios.get('http://localhost:3001/Bisection')
+        //     .then((response) => setJsonData(response.data))
     }, [])
 
     const InputChange = () => {
@@ -115,6 +121,7 @@ const Bisection = () => {
     const [valueXm, setValueXm] = useState([]);
     const [valueXr, setValueXr] = useState([]);
     const [valueError, setValueError] = useState([]);    
+    const [Apikey, setApikey] = useState('');
    
     const [html, setHtml] = useState(null);
     const [Equation,setEquation] = useState("(x^4)-13")
@@ -136,6 +143,10 @@ const Bisection = () => {
         console.log(event.target.value)
         setXR(event.target.value)
     }    
+    const inputApi = (event) =>{
+        console.log(event.target.value);
+        setApikey(event.target.value);        
+    }
 
     const data1 = {
         x: valueIter,
@@ -173,6 +184,9 @@ const Bisection = () => {
     const exampleInput = () => {
         InputChange();
     }
+    // const confirmKey = () => {
+    //     setApikey();
+    // }
 
     return (
         <Container fluid>
@@ -197,9 +211,15 @@ const Bisection = () => {
                             <Col sm={10}><input type="number" id="XR" value={XR} onChange={inputXR} style={{width:"100%"}} className="form-control"></input></Col>
                         </Form.Group>
 
+                        <Form.Group as={Row} className="mb-3">
+                            <Form.Label column sm={2} className="text-center">Api Key</Form.Label>
+                            <Col sm={10}><input type="text" id="api" onChange={inputApi} style={{width:"100%"}} className="form-control"></input></Col>
+                        </Form.Group>
+
                         
                     </Form>
                     <center>
+                        {/* <Button variant="white" onClick={confirmKey} style={{margin:"50px"}}>Confirm Key</Button> */}
                         <Button variant="dark" onClick={exampleInput} style={{margin:"50px"}}>Example Problem</Button>
                         <Button variant="dark" onClick={calculateRoot}>Calculate</Button>
                     </center>
