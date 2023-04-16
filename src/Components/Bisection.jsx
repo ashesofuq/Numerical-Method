@@ -7,17 +7,24 @@ import Plot from 'react-plotly.js';
 import 'bootstrap/dist/css/bootstrap.css';
 
 const Bisection = () => { 
-    // ล่าสุด -> แก้ API ให้เป็นตามเด้านล่างนี้
-    const [JsonData, setJsonData] = useState(null)
+    // ล่าสุด -> เปลี่ยน DB
+    const [JsonData, setJsonData] = useState(null)    
+
     useEffect(() => {
+        const token = localStorage.getItem('token');
         const instance = axios.create({
-            baseURL: 'http://localhost:3001',
-            headers: {'api_key': '2xzPJaiqBYGXnsDJhGVKCt'}
+            baseURL: 'http://localhost:3333',
+            headers: { Authorization: 'Bearer ' + token}
         });
-        instance.get('/Bisection')
-            .then((response) => setJsonData(response.data))
-        // axios.get('http://localhost:3001/Bisection')
-        //     .then((response) => setJsonData(response.data))
+        instance.post('/auth')
+            .then((response) => {
+                if (response.data.status === 'Error'){
+                    alert('Please Login to use Example Problem');
+                } else {
+                    axios.get('http://localhost:3333/bisection')
+                        .then((response) => setJsonData(response.data))
+                }
+            })
     }, [])
 
     const InputChange = () => {
@@ -143,11 +150,7 @@ const Bisection = () => {
         console.log(event.target.value)
         setXR(event.target.value)
     }    
-    const inputApi = (event) =>{
-        console.log(event.target.value);
-        setApikey(event.target.value);        
-    }
-
+          
     const data1 = {
         x: valueIter,
         y: valueXm,
@@ -184,9 +187,7 @@ const Bisection = () => {
     const exampleInput = () => {
         InputChange();
     }
-    // const confirmKey = () => {
-    //     setApikey();
-    // }
+    
 
     return (
         <Container fluid>
@@ -209,17 +210,9 @@ const Bisection = () => {
                         <Form.Group as={Row} className="mb-3">
                             <Form.Label column sm={2} className="text-center">Input XR</Form.Label>
                             <Col sm={10}><input type="number" id="XR" value={XR} onChange={inputXR} style={{width:"100%"}} className="form-control"></input></Col>
-                        </Form.Group>
-
-                        <Form.Group as={Row} className="mb-3">
-                            <Form.Label column sm={2} className="text-center">Api Key</Form.Label>
-                            <Col sm={10}><input type="text" id="api" onChange={inputApi} style={{width:"100%"}} className="form-control"></input></Col>
-                        </Form.Group>
-
-                        
+                        </Form.Group>    
                     </Form>
-                    <center>
-                        {/* <Button variant="white" onClick={confirmKey} style={{margin:"50px"}}>Confirm Key</Button> */}
+                    <center>                        
                         <Button variant="dark" onClick={exampleInput} style={{margin:"50px"}}>Example Problem</Button>
                         <Button variant="dark" onClick={calculateRoot}>Calculate</Button>
                     </center>

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { Button, Container, Form, Table, Row, Col } from "react-bootstrap";
 
 function LoginPage() {

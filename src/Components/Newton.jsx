@@ -9,8 +9,20 @@ const Newton =()=>{
 
     const [JsonData, setJsonData] = useState(null)
     useEffect(() => {
-        axios.get('http://localhost:3002/Newton')
-            .then((response) => setJsonData(response.data))
+        const token = localStorage.getItem('token');
+        const instance = axios.create({
+            baseURL: 'http://localhost:3333',
+            headers: { Authorization: 'Bearer ' + token}
+        });
+        instance.post('/auth')
+            .then((response) => {
+                if (response.data.status === 'Error'){
+                    alert('Please Login to use Example Problem');
+                } else {
+                    axios.get('http://localhost:3333/newton')
+                        .then((response) => setJsonData(response.data))
+                }
+            })
     }, [])
 
     const InputChange = () => {

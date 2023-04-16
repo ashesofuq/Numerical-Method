@@ -9,18 +9,31 @@ import 'bootstrap/dist/css/bootstrap.css';
 const Polynomial =()=>{
     const [JsonData, setJsonData] = useState(null)
     useEffect(() => {
-        axios.get('http://localhost:3002/PolynomialLinearRegression')
-            .then((response) => setJsonData(response.data))
+        const token = localStorage.getItem('token');
+        const instance = axios.create({
+            baseURL: 'http://localhost:3333',
+            headers: { Authorization: 'Bearer ' + token}
+        });
+        instance.post('/auth')
+            .then((response) => {
+                if (response.data.status === 'Error'){
+                    alert('Please Login to use Example Problem');
+                } else {
+                    axios.get('http://localhost:3333/polynomial_regression')
+                        .then((response) => setJsonData(response.data))
+                }
+            })
     }, [])
 
     const InputChange = () => {
         console.log(JsonData[0]);
-        setMatrix(JsonData[0].values);
-        setA(JsonData[0].values[0]);
-        setB(JsonData[0].values[1]);
+        const newData = JSON.parse(JsonData[0].data)
+        setMatrix(newData);
+        setA(newData[0]);
+        setB(newData[1]);
         setX(JsonData[0].x);
         setSize(JsonData[0].n);        
-        setOrder(JsonData[0].order);
+        setOrder(JsonData[0].degree);
     }
 
     const print = () =>{        

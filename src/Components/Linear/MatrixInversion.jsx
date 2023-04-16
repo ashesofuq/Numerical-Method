@@ -8,16 +8,28 @@ import 'bootstrap/dist/css/bootstrap.css';
 const MatrixInversion =()=>{
     const [JsonData, setJsonData] = useState(null)
     useEffect(() => {
-        axios.get('http://localhost:3002/MatrixInversion')
-            .then((response) => setJsonData(response.data))
+        const token = localStorage.getItem('token');
+        const instance = axios.create({
+            baseURL: 'http://localhost:3333',
+            headers: { Authorization: 'Bearer ' + token}
+        });
+        instance.post('/auth')
+            .then((response) => {
+                if (response.data.status === 'Error'){
+                    alert('Please Login to use Example Problem');
+                } else {
+                    axios.get('http://localhost:3333/matrix_inversion')
+                        .then((response) => setJsonData(response.data))
+                }
+            })
     }, [])
 
     const InputChange = () => {
         console.log(JsonData[0]);
-        const newMatrix = JsonData[0].values;
+        const newMatrix = JSON.parse(JsonData[0].matrix);
         const newA = newMatrix.map(row => row.slice(0, -1));
         const newB = newMatrix.map(row => row[newMatrix.length]);
-        setMatrix(JsonData[0].values);
+        setMatrix(newMatrix);
         setA(newA);
         setB(newB);    
         setSize(JsonData[0].size);
