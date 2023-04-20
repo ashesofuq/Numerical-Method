@@ -1,4 +1,4 @@
-﻿# Numerical-Method
+﻿# Numerical-Method Calculator
  
  
  # Start Project
