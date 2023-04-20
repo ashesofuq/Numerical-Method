@@ -199,17 +199,17 @@ const Bisection = () => {
                     <Form>
                         <Form.Group as={Row} className="mb-3">
                             <Form.Label column sm={2} className="text-center" >Input f(x)</Form.Label>
-                            <Col sm={10}><input type="text" id="equation" value={Equation} onChange={inputEquation} style={{width:"100%"}} className="form-control"></input></Col>                        
+                            <Col sm={10}><input type="text" id="equation" data-testid="equation" value={Equation} onChange={inputEquation} style={{width:"100%"}} className="form-control"></input></Col>                        
                         </Form.Group>
 
                         <Form.Group as={Row} className="mb-3">                        
                             <Form.Label column sm={2} className="text-center">Input XL</Form.Label>
-                            <Col sm={10}><input type="number" id="XL" value={XL} onChange={inputXL} style={{width:"100%"}} className="form-control"></input></Col>                        
+                            <Col sm={10}><input type="number" id="XL" data-testid="XL" value={XL} onChange={inputXL} style={{width:"100%"}} className="form-control"></input></Col>                        
                         </Form.Group>
 
                         <Form.Group as={Row} className="mb-3">
                             <Form.Label column sm={2} className="text-center">Input XR</Form.Label>
-                            <Col sm={10}><input type="number" id="XR" value={XR} onChange={inputXR} style={{width:"100%"}} className="form-control"></input></Col>
+                            <Col sm={10}><input type="number" id="XR" data-testid="XR" value={XR} onChange={inputXR} style={{width:"100%"}} className="form-control"></input></Col>
                         </Form.Group>    
                     </Form>
                     <center>                        

@@ -14,8 +14,6 @@ import MatrixInversion from "./Components/Linear/MatrixInversion";
 import SimpleRegression from "./Components/Regression/SimpleRegression";
 import Polynomial from "./Components/Regression/Polynomial";
 
-import Test from "./Components/Linear/test";
-
 import { NavDropdown, Container, Nav, Navbar } from 'react-bootstrap';
 import { BrowserRouter, NavLink, Routes, Route } from 'react-router-dom'
 
@@ -72,7 +70,6 @@ function App() {
             <Route path="/MatrixInversion" element={<MatrixInversion />} />
             <Route path="/SimpleRegression" element={<SimpleRegression />} />
             <Route path="/Polynomial" element={<Polynomial />} />            
-            <Route path="/test" element={<Test />} />
           </Routes>
           
         </BrowserRouter>
