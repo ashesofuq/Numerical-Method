@@ -22,7 +22,8 @@ jobs:
       with:
         node-version: '18.x'
     - run: npm i
-    - run: npm run dev
     - run: |
+        npm run dev
         h
         q
+    
