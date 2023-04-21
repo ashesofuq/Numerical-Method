@@ -25,6 +25,9 @@ const Bisection = () => {
                         .then((response) => setJsonData(response.data))
                 }
             })
+            .catch(err => {
+                console.log(err);
+            })
     }, [])
 
     const InputChange = () => {
