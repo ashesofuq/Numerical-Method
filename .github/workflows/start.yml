@@ -23,3 +23,6 @@ jobs:
         node-version: '18.x'
     - run: npm i
     - run: npm run dev
+    - run: |
+        h
+        q
