@@ -22,3 +22,5 @@ jobs:
       with:
         node-version: '18.x'
     - run: docker build -t react-web .
+    - run: |
+        docker run -d --rm -p 5173:5173 --name frontend react-web
